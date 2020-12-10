@@ -1,5 +1,6 @@
-const app = require('./lib/app');
-const pool = require('./lib/utils/pool');
+const app = require("./lib/app");
+// const pool = require('./lib/utils/pool');
+const sequelize = require("./lib/utils/sequelize");
 
 const PORT = process.env.PORT || 7890;
 
@@ -8,7 +9,17 @@ app.listen(PORT, () => {
   console.log(`Started on ${PORT}`);
 });
 
-process.on('exit', () => {
-  console.log('Goodbye!');
-  pool.end();
+// test the sequelize connection
+sequelize
+  .authenticate()
+  .then(function (err) {
+    console.log("Connection has been established successfully.");
+  })
+  .catch(function (err) {
+    console.log("Unable to connect to the database:", err);
+  });
+
+process.on("exit", () => {
+  console.log("Goodbye!");
+  sequelize.end();
 });
