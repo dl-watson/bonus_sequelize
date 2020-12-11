@@ -1,32 +1,23 @@
-const { Toys } = require("../models/Toys");
-// const db = require("../models/index");
-// const { Sequelize } = require("sequelize");
+// const { Toys } = require("../models/Toys");
 
-// Creates a toy
-const createToy = async (req, res) => {
-  try {
-    const toy = await Toys.create(
-      {
-        color: req.body.color,
-        name: req.body.name,
-      },
-      { transaction: t }
-    );
-    console.log(toy.toJSON());
+// // Creates a toy
+// const createToy = (req, res) => {
+//   // console.log(Toys === sequelize.models.Toys); // returns true
+//   return Toys.create({
+//     color: req.body.color,
+//     name: req.body.name,
+//   })
+//     .then((toy) => res.status(201).send(toy))
+//     .catch((err) => console.log(err));
+// };
 
-    res.send(toy);
-  } catch (err) {
-    console.log(`Error: ${err}`);
-  }
-};
+// console.log(
+//   createToy({
+//     name: "blue",
+//     color: "sailboat",
+//   })
+// );
 
-console.log(
-  createToy({
-    name: "blue",
-    color: "sailboat",
-  })
-);
-
-module.exports = {
-  createToy,
-};
+// module.exports = {
+//   createToy,
+// };
