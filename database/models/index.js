@@ -1,7 +1,6 @@
 "use strict";
 
 // This is the entry point for models
-
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
