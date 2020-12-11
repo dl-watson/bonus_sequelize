@@ -7,6 +7,6 @@ module.exports = {
     dialectOptions: {
       ssl: true,
     },
-    port: process.env.PORT || 7890,
+    port: process.env.PORT || 5432,
   },
 };

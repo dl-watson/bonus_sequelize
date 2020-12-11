@@ -13,20 +13,28 @@ describe("bonus_sequelize routes", () => {
   });
 
   it("posts a new toy", async () => {
-    const res = await request(app)
-      .post("/api/v1/toys")
-      .send({ color: "blue", name: "sailboat" });
+    await Toys.create({
+      color: "blue",
+      name: "sailboat",
+    });
+
+    const res = await request(app).get("/api/v1/toys");
 
     expect(res.body).toEqual(
-      expect.objectContaining({
-        color: "blue",
-        name: "sailboat",
-      })
+      expect.arrayContaining([
+        {
+          color: "blue",
+          createdAt: expect.anything(),
+          id: 1,
+          name: "sailboat",
+          updatedAt: expect.anything(),
+        },
+      ])
     );
   });
 
   it("gets all toys", async () => {
-    const toys = await Promise.all(
+    await Promise.all(
       [
         {
           color: "red",
