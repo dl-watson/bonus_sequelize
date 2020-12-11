@@ -9,7 +9,7 @@ describe("bonus_sequelize routes", () => {
   });
 
   afterAll(() => {
-    return app.close();
+    return sequelize.connectionManager.close();
   });
 
   it("posts a new toy", async () => {
