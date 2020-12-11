@@ -1,5 +1,5 @@
 const app = require("./lib/app");
-const sequelize = require("./lib/utils/sequelize");
+const sequelize = require("./database/utils/sequelize");
 
 const PORT = process.env.PORT || 7890;
 

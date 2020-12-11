@@ -1,55 +1,25 @@
+"use strict";
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../../lib/utils/sequelize");
+const sequelize = require("../utils/sequelize");
 
-module.exports = (sequelize) => {
-  class Toys extends Sequelize.Model {}
-  Toys.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      color: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "red",
-        validate: {
-          notEmpty: true,
-          msg: "Please provide a value for field 'color'",
-        },
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "truck",
-        validate: {
-          notEmpty: true,
-          msg: "Please provide a value for field 'name'",
-        },
-      },
+class Toys extends Sequelize.Model {}
+Toys.init(
+  {
+    color: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "red",
     },
-    {
-      sequelize,
-      modelName: "toys",
-    }
-  );
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "truck",
+    },
+  },
+  {
+    sequelize,
+    modelName: "toys",
+  }
+);
 
-  (async () => {
-    await sequelize.sync({ force: true });
-
-    try {
-      const toy = await Toys.create({
-        color: "red",
-        name: "truck",
-      });
-      // eslint-disable-next-line no-console
-      console.log(toy.toJSON());
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(`Error connecting to the database: ${error}`);
-    }
-  })();
-
-  return Toys;
-};
+module.exports = { Toys };
