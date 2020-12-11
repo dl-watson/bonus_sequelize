@@ -9,13 +9,20 @@ app.listen(PORT, () => {
   console.log(`Started on ${PORT}`);
 });
 
-// test the sequelize connection
+// return models.sequelize.sync().then((result) => {
+//   app.listen(PORT, () => {
+//     // eslint-disable-next-line no-console
+//     console.log(`Started on ${PORT}`);
+//   });
+// });
+
+// Tests the sequelize connection
 sequelize
   .authenticate()
-  .then(function (err) {
+  .then((err) => {
     console.log("Connection has been established successfully.");
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.log("Unable to connect to the database:", err);
   });
 
