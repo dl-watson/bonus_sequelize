@@ -5,17 +5,33 @@ module.exports = (sequelize) => {
   class Toys extends Sequelize.Model {}
   Toys.init(
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
       },
       color: {
         type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "red",
+        validate: {
+          notEmpty: true,
+          msg: "Please provide a value for field 'color'",
+        },
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "truck",
+        validate: {
+          notEmpty: true,
+          msg: "Please provide a value for field 'name'",
+        },
       },
     },
     {
       sequelize,
-      modelName: "Toys",
+      modelName: "toys",
     }
   );
 
@@ -27,13 +43,13 @@ module.exports = (sequelize) => {
         color: "red",
         name: "truck",
       });
+      // eslint-disable-next-line no-console
       console.log(toy.toJSON());
     } catch (error) {
-      console.error("Error connecting to the database: ", error);
+      // eslint-disable-next-line no-console
+      console.error(`Error connecting to the database: ${error}`);
     }
   })();
-
-  console.log(Toys === sequelize.models.Toys); // true
 
   return Toys;
 };
