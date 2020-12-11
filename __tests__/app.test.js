@@ -46,7 +46,31 @@ describe("bonus_sequelize routes", () => {
     const res = await request(app).get("/api/v1/toys");
 
     // oh my god, the fucking updatedAt is returning as a date datatype, where jest is expecting a string datatype
-    expect(res.body).toEqual(expect.arrayContaining(toys));
+    expect(res.body).toEqual(
+      expect.arrayContaining([
+        {
+          color: "red",
+          createdAt: expect.anything(),
+          id: 1,
+          name: "truck",
+          updatedAt: expect.anything(),
+        },
+        {
+          color: "yellow",
+          createdAt: expect.anything(),
+          id: 2,
+          name: "ducky",
+          updatedAt: expect.anything(),
+        },
+        {
+          color: "green",
+          createdAt: expect.anything(),
+          id: 3,
+          name: "block",
+          updatedAt: expect.anything(),
+        },
+      ])
+    );
   });
 
   it("gets a toy by id", async () => {
