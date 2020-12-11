@@ -10,7 +10,7 @@ describe("bonus_sequelize routes", () => {
   });
 
   afterAll(() => {
-    return sequelize.end();
+    return sequelize.close();
   });
 
   it("posts a new toy", async () => {
