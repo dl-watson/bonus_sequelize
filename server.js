@@ -18,7 +18,7 @@ sequelize
     console.log("Unable to connect to the database:", err);
   });
 
-process.on("exit", () => {
+app.on("close", () => {
   console.log("Goodbye!");
-  sequelize.end();
+  sequelize.close();
 });

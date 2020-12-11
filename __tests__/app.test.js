@@ -1,4 +1,3 @@
-const fs = require("fs");
 const request = require("supertest");
 const app = require("../lib/app");
 const sequelize = require("../database/utils/sequelize");
@@ -10,7 +9,7 @@ describe("bonus_sequelize routes", () => {
   });
 
   afterAll(() => {
-    return sequelize.close();
+    return app.close();
   });
 
   it("posts a new toy", async () => {
