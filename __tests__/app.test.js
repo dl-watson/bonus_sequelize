@@ -99,7 +99,7 @@ describe("bonus_sequelize routes", () => {
       name: "trek",
     });
 
-    const updateToy = await Toys.update(
+    await Toys.update(
       {
         color: "red",
         name: "truck",
@@ -116,5 +116,20 @@ describe("bonus_sequelize routes", () => {
       })
     );
   });
-  it("deletes a toy by id", async () => {});
+
+  it("deletes a toy by id", async () => {
+    const toy = await Toys.create({
+      color: "bred",
+      name: "trek",
+    });
+
+    await Toys.destroy({
+      where: { id: toy.id },
+      truncate: false,
+    });
+
+    const res = await request(app).get("/api/v1/toys/");
+
+    expect(res.body).toEqual([]);
+  });
 });
