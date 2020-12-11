@@ -8,10 +8,6 @@ describe("bonus_sequelize routes", () => {
     return sequelize.sync({ force: true });
   });
 
-  afterAll(() => {
-    return sequelize.connectionManager.close();
-  });
-
   it("posts a new toy", async () => {
     await Toys.create({
       color: "blue",
